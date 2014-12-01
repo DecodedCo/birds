@@ -30,37 +30,6 @@ twitter.get('search/tweets',{q: '#birds2013'}, function(err, data) {
 
 
 
-// Read the data store
-fs.readFile('./data.json', function(error, json){
-    // Log any errors
-    if (error) { console.log(error) };
-    // Get the JSON contents and ensure it's JSON
-
-    var existingData = JSON.parse(json);
-    console.log(existingData);
-    // If already in list, increment checkinCount
-
-    for (var item in existingData) {
-        // existingDate[item] = key
-        // item = value
-
-        twitter.get('statuses/oembed.json',{id: item},function(err,data){
-            console.log(err);
-            if(data != null && typeof data === 'object') {
-                existingData[item] = data;
-            } else {
-                existingData[item] = 'crap';
-            }
-        })
-
-    }
-
-    setInterval(function(){
-        console.log(existingData)
-    },5000)
-
-});
-
 
 
 
