@@ -1,0 +1,131 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body, html {
+	height: 100%;
+}
+
+body {
+	font-family: "Courier New", monospace;
+}
+
+canvas {
+position: absolute;
+top: 0px;
+left: 0px;	
+z-index: -9;
+}
+
+#wrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	float: left;
+}
+
+ 
+#video-container {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	z-index: 1;
+}
+
+.full-size #video-container {
+	width: 100%;
+}
+
+
+.video-stream {
+	position: absolute;
+	z-index: -1;
+	top: 0px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.navbar-fixed-top {
+ 
+}
+
+.content-stream blockquote {
+	float:left;
+}
+
+.twitterdiv {
+	position: absolute;
+	z-index: 999;
+	opacity: 0.8;
+}
+
+.twitter-tweet {
+	position: relative;
+	left:0px;
+}
+
+.youtube-wrapper {
+	z-index: 800;
+	position: absolute;
+	opacity: 0.8;
+}
+
+.youtube-wrapper iframe {
+	width: 480px;
+	height: 270px;
+}
+
+.external-website {
+	width: 480px;
+	height: 480px;
+	overflow: hidden;
+	padding: 0em;
+	position: absolute;
+	z-index: 999;
+ 	background: white;
+	background: rgba(255,255,255,0.8);	
+	opacity: 0.8;
+}
+.external-website iframe {
+ 	width: 100%;
+ 	height: 480px;
+
+}
+/* These are the styles for the wikipedia div: */
+#wikidiv {
+	position: absolute;
+	z-index: 999;
+	left: 0px;
+	top: 0;
+}
+
+.transparent-box {
+	background: rgba(255,255,255,0.8);
+	width: 22em;
+	padding: 1.6em;	
+}
+
+.social {
+	position: absolute;
+	z-index: 999;
+	background: rgba(255,255,255,0.8);
+	top: 0px;
+	right: 0px;
+	padding: 0.25em 0.1em;
+}
+
+.social iframe {
+	margin-top: 0.3em;
+}
+
+.social a {
+	line-height: 1em;
+	padding: 0.5em 1em;
+	top: -0.4em;
+	position: relative;
+}
