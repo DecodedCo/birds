@@ -25,14 +25,12 @@ function getTweets() {
 
 
         for (var i in data.statuses) {
-            console.log(data.statuses[i]);
             var twitterID = data.statuses[i].id_str;
             jsonObject[i] = twitterID;
         }
         var newData = JSON.stringify(jsonObject);
         fs.writeFile('./data.json', newData, function(error){
-            if (error) { console.log(error) }
-            else { console.log('The file was saved') }
+            if (error) {   }
         });
     });
 
