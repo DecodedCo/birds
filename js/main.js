@@ -115,7 +115,7 @@ function searchRecentTweets() {
       	    (function(i) {
       	        setTimeout(function() {
       	            displayRecentTweet(firstTenTweets[i]);
-      	        }, 4000 * i); // <-- You need to multiply by i here.
+      	        }, 18000 * i); // <-- You need to multiply by i here.
       	    })(i);
       	}
 
