@@ -12,6 +12,9 @@ var twitter = new Twitter({
 var jsonObject = {};
 
 twitter.get('search/tweets',{q: '#birds2013'}, function(err, data) {
+
+
+    console.log(data);
     for (var i in data.statuses) {
         console.log(data.statuses[i]);
         var twitterID = data.statuses[i].id_str;
@@ -50,7 +53,7 @@ fs.readFile('./data.json', function(error, json){
             }
         })
 
-    } 
+    }
 
     setInterval(function(){
         console.log(existingData)

@@ -16,12 +16,15 @@ birds.exec( 0, function() {
 });
 
 birds.exec( 5, function() {
-    this.play( startTime );
+    // this.play( startTime ); play at random time
+
+    this.play();
+
     this.unmute();
 });
 
 birds.on("pause",function(){
- 
+
 })
 
 /*
@@ -44,7 +47,7 @@ birds.code({
     }
 });
 
-// Adds a YouTube video for the amount of time specified. 
+// Adds a YouTube video for the amount of time specified.
 // http://www.youtube.com/watch?v=En_2T7KH6RA
 // The argument the addYoutube fn takes is the ID from the YouTube video
 
@@ -54,7 +57,7 @@ birds.code({
     onStart: function() {
         addYoutube("En_2T7KH6RA");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeYoutube();
     }
 });
@@ -68,7 +71,7 @@ birds.code({
     onStart: function() {
         addIframe("http://bbc.co.uk/programmes/p003c1d3","In our time: Comedy in Ancient Greek Theatre","inourtime");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("inourtime");
     }
 });
@@ -93,7 +96,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.thocp.net/biographies/licklidder_jcr.html","J C R Licklidder","JCRLbio");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("JCRLbio");
     }
 });
@@ -103,7 +106,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.w3.org/People/Berners-Lee/","Tim Berners-Lee","tbl");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("tbl");
     }
 });
@@ -113,7 +116,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.theatlantic.com/magazine/archive/1945/07/as-we-may-think/303881/","As We May Think. Vannevar Bush","aswemaythink");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("aswemaythink");
     }
 });
@@ -123,7 +126,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.kurzweilai.net/memorandum-for-members-and-affiliates-of-the-intergalactic-computer-network","Memorandum For Members and Affiliates of the Intergalactic Computer Network. J C R Licklider","JCRmemo");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("JCRmemo");
     }
 });
@@ -134,7 +137,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.britannica.com/EBchecked/topic/86116/Vannevar-Bush","Vannevar Bush","Vannevarbush2");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("Vannevarbush2");
     }
 });
@@ -145,7 +148,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.wholeearth.com/index.php","Whole Earth Catalogue","wholeearth");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("wholeearth");
     }
 });
@@ -156,7 +159,7 @@ birds.code({
     onStart: function() {
         addIframe("https://vimeo.com/45449178","Van Dyke Parks on Discover Aerica","vdpvid");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("vdpvid");
     }
 });
@@ -174,7 +177,7 @@ birds.code({
     onStart: function() {
         addIframe("http://info.cern.ch/","info.cern.ch","info.cern");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("info.cern");
     }
 });
@@ -184,7 +187,7 @@ birds.code({
     onStart: function() {
         addIframe("https://soundcloud.com/das_hund","Das Hund Soundcloud","dashundsoundcloud");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("dashundsoundcloud");
     }
 });
@@ -195,7 +198,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.wired.com/wired/archive/3.06/xanadu_pr.html","The Curse of Xanadu by Gary Wolf. Wired.com","wired");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("wired");
     }
 });
@@ -205,7 +208,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.cabinetmagazine.org/issues/13/rosenberg.php","Hummingbird Futures by Daniel Rosenberg from Cabinet Spring 2004","cabinet");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("cabinet");
     }
 });
@@ -216,7 +219,7 @@ birds.code({
     onStart: function() {
         addIframe("https://sites.google.com/site/greekdemocracyanddrama/home/greek-drama/comedy","Greek Comedy","greekcomedy");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("greekcomedy");
     }
 });
@@ -228,7 +231,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.patrickcoyle.info/","PatrickCoyle.info","Pat");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("Pat");
     }
 });
@@ -239,7 +242,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.bbc.co.uk/iplayer/","iPlayer","iplayer");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("iplayer");
     }
 });
@@ -248,7 +251,7 @@ birds.wikipedia({
   end: 4082,
   src: "http://en.wikipedia.org/wiki/Main_Page",
   title: "Main Page",
-  target: "wikidiv" 
+  target: "wikidiv"
 });
 
 birds.code({
@@ -257,7 +260,7 @@ birds.code({
     onStart: function() {
         addIframe("http://www.lrb.co.uk/v33/n19/daniel-soar/it-knows","It Knows by Daniel Soar. London Review of Books 6 October 2011", "lrb");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("lrb");
     }
 });
@@ -267,7 +270,7 @@ birds.code({
     onStart: function() {
         addIframe("http://hyperland.com/","Ted Nelsons Hyperland.com","hyperland");
     },
-    onEnd: function() { 
+    onEnd: function() {
         removeIframe("hyperland");
     }
 });
@@ -503,7 +506,7 @@ birds.code({
     onEnd: function() {
         removeTweet()
     }
-}); 
+});
 
 
 

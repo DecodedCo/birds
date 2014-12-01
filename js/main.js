@@ -2,7 +2,6 @@ $(function(){
 	"use strict";
 
 	$('#tweet1').click(function(){
-		console.log('clicked');
 		$('.video-stream').css({
 			'top': 'auto',
 			'left': 'auto'
@@ -13,7 +12,7 @@ $(function(){
 			'right': '0px'
 		})
 	})
-	
+
 	var fullScreenVideo = function(element){
 		$(element).animate({
 			'width': '100%',
@@ -26,6 +25,8 @@ $(function(){
 	});
 
 	resizeLayout();
+
+	searchRecentTweets();
 })
 
 $(window).resize(function(){
@@ -40,12 +41,10 @@ function resizeLayout() {
 }
 
 function displayTweet(tweetID) {
-	console.log('now!')
 	$.ajax({
 	    url: "https://api.twitter.com/1/statuses/oembed.json?id="+tweetID,
 	            dataType: "jsonp",
 	            success: function(data){
-	            	console.log(data)
 
 	            	var tweetContent = data.html.replace("<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>","")
 
@@ -54,10 +53,84 @@ function displayTweet(tweetID) {
 	            	twttr.widgets.load();
 	            	var element = $('.twitterdiv');
 	            	positionRandomly(element);
-	                
+
 	            }
-	        });						
+	        });
 }
+
+
+function displayRecentTweet(tweetID) {
+	$.ajax({
+	    url: "https://api.twitter.com/1/statuses/oembed.json?id="+tweetID,
+	            dataType: "jsonp",
+	            success: function(data){
+
+
+	            	var randomNumber = Math.floor(Math.random() * 50000) + 2000;
+
+
+	            	var tweetContent = data.html.replace("<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>","")
+
+	            	var div = $('<div class="recenttwitterdiv">')
+	            	$('#wrapper').append(div);
+
+	            	div.prepend(tweetContent);
+	            	twttr.widgets.load();
+	            	positionRandomly(div);
+
+	            	setTimeout(function(){
+	            		div.remove();
+	            	}, randomNumber)
+
+	            }
+	        });
+}
+
+
+function searchRecentTweets() {
+
+
+	$.ajax({
+	    url: "/nodejs/data.json",
+	    dataType: "json",
+      success: function(data){
+
+
+      	var firstTenTweets = _.filter(data, function(item,iterator){
+      		if (iterator < 10) {
+      			return item;
+      		}
+      	})
+
+      	var remainderTweets = _.filter(data, function(item,iterator){
+      		if (iterator > 10) {
+      			return item;
+      		}
+      	})
+
+      	// for each item in firstTen, one straight away
+      	// then randomly popping up over 3 minutes
+
+      	for(var i=0; i < firstTenTweets.length; i++) {
+      	    (function(i) {
+      	        setTimeout(function() {
+      	            displayRecentTweet(firstTenTweets[i]);
+      	        }, 4000 * i); // <-- You need to multiply by i here.
+      	    })(i);
+      	}
+
+
+
+      	// for the rest, randomly spaced throughout entire length
+
+      }, // End on success
+      error: function(message) {
+      	console.log(message);
+      }
+  });
+
+
+} // end searchRecentTweets
 
 function removeTweet() {
 	$('.twitterdiv').html('');
@@ -85,20 +158,28 @@ function removeYoutube(){
 }
 
 function positionRandomly(element) {
-	var random = Math.floor((Math.random()*10)+1);
-	var outerEdge = $(window).outerWidth();
-	var ifWidth = $(element).width();
-	var range = outerEdge - ifWidth;
-	var left = range / random;
-	var top = random*20;
+	setTimeout(function(){
+		var random = Math.floor((Math.random()*10)+1);
+		var outerEdge = $(window).outerWidth();
+		var windowHeight = $(window).height();
 
-	var topBottom = ["top","bottom"];
-	topBottom = topBottom[Math.floor(Math.random() * topBottom.length)];
-	topBottom = String(topBottom);
-	console.log(topBottom);
-	$(element).css({
-		"top": top + 'px',
-		"left": left + 'px'
-	})
-	$(element).fadeIn();
+		var ifWidth = $(element).width();
+		var ifHeight = $(element).height();
+		var heightRange = windowHeight - ifHeight;
+
+		var range = outerEdge - ifWidth;
+
+		var left = Math.floor((Math.random()*range)+1);
+		var top = Math.floor((Math.random()*heightRange)+1);
+		console.log(top);
+		var topBottom = ["top","bottom"];
+		topBottom = topBottom[Math.floor(Math.random() * topBottom.length)];
+		topBottom = String(topBottom);
+		$(element).css({
+			"top": top + 'px',
+			"left": left + 'px'
+		})
+		$(element).fadeIn();
+	},500);
+
 }
