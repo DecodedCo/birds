@@ -11,28 +11,42 @@ var twitter = new Twitter({
 
 var jsonObject = {};
 
-twitter.get('search/tweets',{q: '#birds2013'}, function(err, data) {
 
 
-    console.log(data);
-    for (var i in data.statuses) {
-        console.log(data.statuses[i]);
-        var twitterID = data.statuses[i].id_str;
-        jsonObject[i] = twitterID;
-    }
-    var newData = JSON.stringify(jsonObject);
-    fs.writeFile('./data.json', newData, function(error){
-        if (error) { console.log(error) }
-        else { console.log('The file was saved') }
+
+
+
+
+
+
+
+function getTweets() {
+    twitter.get('search/tweets',{q: '#birds2013'}, function(err, data) {
+
+        console.log(data);
+        for (var i in data.statuses) {
+            console.log(data.statuses[i]);
+            var twitterID = data.statuses[i].id_str;
+            jsonObject[i] = twitterID;
+        }
+        var newData = JSON.stringify(jsonObject);
+        fs.writeFile('./data.json', newData, function(error){
+            if (error) { console.log(error) }
+            else { console.log('The file was saved') }
+        });
     });
-});
+
+}
+
+getTweets();
 
 
+setInterval(function() {
+
+    getTweets();
 
 
-
-
-
+}, 7200000);
 
 
 
