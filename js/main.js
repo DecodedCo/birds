@@ -27,12 +27,13 @@ $(function(){
 	resizeLayout();
 
 	searchRecentTweets();
-
   setTimeout(function(){
+    setInterval(function(){
+      getNewTweets();
+    },18000)
+  },18000)
 
-    getNewTweets();
 
-  }, 180000); // 3 minutes
 })
 
 $(window).resize(function(){
@@ -119,28 +120,7 @@ function searchRecentTweets() {
       	    })(i);
       	}
 
-
-
-      	// for the rest, randomly spaced throughout entire length
-
-      }, // End on success
-      error: function(message) {
-      	console.log(message);
-      }
-  });
-
-
-} // end searchRecentTweets
-
-
-
-function getNewTweets() {
-
-    $.ajax({
-        url: "/nodejs/data.json",
-        dataType: "json",
-        success: function(data){
-
+        setTimeout(function(){
 
           var remainingTweets = _.filter(data, function(item,iterator){
             if (iterator > 10) {
@@ -158,9 +138,30 @@ function getNewTweets() {
               })(i);
           }
 
+        }, 180000); // 3 minutes
+
+      	// for the rest, randomly spaced throughout entire length
+
+      }, // End on success
+      error: function(message) {
+      }
+  });
 
 
-          // for the rest, randomly spaced throughout entire length
+} // end searchRecentTweets
+
+var oldId = '';
+
+function getNewTweets() {
+
+    $.ajax({
+        url: "/nodejs/new-data.json",
+        dataType: "json",
+        success: function(data){
+
+          if (oldId != data[0])
+            displayRecentTweet(data[0]);
+          oldId = data[0]
 
         }, // End on success
         error: function(message) {
