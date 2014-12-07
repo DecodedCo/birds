@@ -9,29 +9,33 @@ var twitter = new Twitter({
   access_token_secret: 'gZNpAdl2d4RbnqwxhXoEBRwjSclq2uOEP2cYhI13MKI'
 });
 
-var jsonObject = {};
-
-
-
-
-
-
-
+var jsonArray = [];
+var jsonObject = {}
 
 
 
 function getTweets() {
-    twitter.get('search/tweets',{q: '#birds2013'}, function(err, data) {
+    twitter.get('search/tweets',{q: '#birds2013', count: 100}, function(err, data) {
 
+        if (data) {
 
-        for (var i in data.statuses) {
-            var twitterID = data.statuses[i].id_str;
-            jsonObject[i] = twitterID;
+          for (var i in data.statuses) {
+              var twitterID = data.statuses[i].id_str;
+              jsonArray[i] = twitterID;
+          }
+          jsonArray.reverse();
+          for (var i=0; i<jsonArray.length;i++) {
+            jsonObject[i] = jsonArray[i]
+          }
+
+          var newData = JSON.stringify(jsonObject);
+
+          fs.writeFile('./data.json', newData, function(error){
+              if (error) {    }
+          });
+        } else {
+
         }
-        var newData = JSON.stringify(jsonObject);
-        fs.writeFile('./data.json', newData, function(error){
-            if (error) {   }
-        });
     });
 
 }
@@ -44,7 +48,7 @@ setInterval(function() {
     getTweets();
 
 
-}, 7200000);
+}, 3600000);
 
 
 
