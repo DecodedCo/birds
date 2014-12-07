@@ -34,7 +34,7 @@ function getTweets() {
               if (error) {    }
           });
         } else {
-
+          console.log(err)
         }
     });
 
@@ -48,7 +48,7 @@ setInterval(function() {
     getTweets();
 
 
-}, 3600000);
+}, 30000);
 
 
 

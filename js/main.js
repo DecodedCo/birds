@@ -27,6 +27,12 @@ $(function(){
 	resizeLayout();
 
 	searchRecentTweets();
+
+  setTimeout(function(){
+
+    getNewTweets();
+
+  }, 180000); // 3 minutes
 })
 
 $(window).resize(function(){
@@ -102,12 +108,6 @@ function searchRecentTweets() {
       		}
       	})
 
-      	var remainderTweets = _.filter(data, function(item,iterator){
-      		if (iterator > 10) {
-      			return item;
-      		}
-      	})
-
       	// for each item in firstTen, one straight away
       	// then randomly popping up over 3 minutes
 
@@ -131,6 +131,43 @@ function searchRecentTweets() {
 
 
 } // end searchRecentTweets
+
+
+
+function getNewTweets() {
+
+    $.ajax({
+        url: "/nodejs/data.json",
+        dataType: "json",
+        success: function(data){
+
+
+          var remainingTweets = _.filter(data, function(item,iterator){
+            if (iterator > 10) {
+              return item;
+            }
+          })
+
+          // for each item in remainingtweets, do one every thirty seconds
+
+          for(var i=0; i < remainingTweets.length; i++) {
+              (function(i) {
+                  setTimeout(function() {
+                      displayRecentTweet(remainingTweets[i]);
+                  }, 30000 * i); // <-- You need to multiply by i here.
+              })(i);
+          }
+
+
+
+          // for the rest, randomly spaced throughout entire length
+
+        }, // End on success
+        error: function(message) {
+        }
+    });
+
+}
 
 function removeTweet() {
 	$('.twitterdiv').html('');
